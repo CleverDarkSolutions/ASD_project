@@ -8,26 +8,26 @@ file_sorted = open('sorted_data.txt','r')
 file_reversed = open('reverse_sorted_data.txt', 'r')
 
 #--------------------------------QUICKSORT----------------------------------------------------------------
-def partition(array, start, end):
-    pivot = array[start]
-    low = start + 1
-    high = end
 
-    while True:
-        while low <= high and array[high] <= pivot:
-            high = high - 1
+def partition(arr, low, high):
+    pivot = arr[low]
+    i = low - 1
+    j = high + 1
 
-        while low <= high and array[low] >= pivot:
-            low = low + 1
+    while (True):
 
-        if low <= high:
-            array[low], array[high] = array[high], array[low]
-        else:
-            break
+        i += 1
+        while (arr[i] < pivot):
+            i += 1
 
-    array[start], array[high] = array[high], array[start]
+        j -= 1
+        while (arr[j] > pivot):
+            j -= 1
 
-    return high
+        if (i >= j):
+            return j
+
+        arr[i], arr[j] = arr[j], arr[i]
 
 
 def quick_sort(array, start, end):

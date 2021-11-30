@@ -10,24 +10,16 @@ file_reversed = open('reverse_sorted_data.txt', 'r')
 #--------------------------------QUICKSORT----------------------------------------------------------------
 
 def partition(arr, low, high):
-    pivot = arr[low]
-    i = low - 1
-    j = high + 1
 
-    while (True):
+    pivot = arr[high]
 
-        i += 1
-        while (arr[i] < pivot):
+    i = (low - 1)
+    for j in range(low, high):
+        if (arr[j] <= pivot):
             i += 1
-
-        j -= 1
-        while (arr[j] > pivot):
-            j -= 1
-
-        if (i >= j):
-            return j
-
-        arr[i], arr[j] = arr[j], arr[i]
+            arr[i], arr[j] = arr[j], arr[i]
+    arr[i + 1], arr[high] = arr[high], arr[i + 1]
+    return (i + 1)
 
 
 def quick_sort(array, start, end):
@@ -54,7 +46,12 @@ arr = [int(i) for i in arr]
 quick_sort(arr, 0, n - 1)
 timeTwo = time.time() - start_time
 
+arr = file_reversed.read().split(',');
+arr[0] = 0           #preventing error - python adds some characters to first element
+arr = [int(i) for i in arr]
 
+quick_sort(arr)
+timeThree = time.time() - start_time
 
 print(timeOne)
 print(timeTwo)
